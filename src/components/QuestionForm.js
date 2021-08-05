@@ -15,7 +15,7 @@ function QuestionForm() {
       ...formData,
       [event.target.name]: event.target.value,
     });
-    console.log(formData)
+
   }
 
   function handleSubmit(event) {
@@ -25,14 +25,12 @@ function QuestionForm() {
       headers: {
         "Content-Type": "application/json"
       },
-      Body:
-      {
+      body: JSON.stringify({
         prompt: formData.prompt,
         answers: [formData.answer1, formData.answer2, formData.answer3, formData.answer4],
         correctIndex: parseInt(formData.correctIndex)
-      }
+      })
     });
-    console.log("form submitted")
   }
 
   return (

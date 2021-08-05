@@ -65,6 +65,17 @@
         "controlled"
       ],
       "correctIndex": 1
+    },
+    {
+      "prompt": "What is 2+2",
+      "answers": [
+        "4",
+        "2",
+        "6",
+        "1"
+      ],
+      "correctIndex": 0,
+      "id": 7
     }
   ]
 }
