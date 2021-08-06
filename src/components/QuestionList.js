@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import QuestionItem from "./QuestionItem";
 
 function QuestionList() {
   const [questionItem, setQuestionItem] = useState([])
@@ -12,15 +13,18 @@ function QuestionList() {
       console.log(questionItem)
   }, []);
 
-  function deleteQuestion() {
-    fetch(`http://localhost:4000/questions/${questionItem}`, {method: 'DELETE'})
-      .then(() => setQuestionItem(''))
+  function deleteQuestion(event) {
+    fetch(`http://localhost:4000/questions/${event.target.parentElement.id}`, {method: 'DELETE'})
+      .then(resp => resp.json())
+      .then(function () {
+        setQuestionItem(questionItem.filter(question => question.id != event.target.parentElement.id))
+      })
   };
 
   return (
     <section>
       <h1>Quiz Questions</h1>
-      <ul>{questionItem.map((question) => <li key={question.id}>{question.prompt}<button onClick={deleteQuestion}>Delete</button></li>)}</ul>
+      <ul>{questionItem.map((question) => <QuestionItem handleDelete={deleteQuestion} question={question} key={question.id}/>)}</ul>
     </section>
   );
 }
